@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Styles from './login-styles.scss'
 import { FormStatus, Footer, LoginHeader, Input } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
@@ -20,6 +20,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
     passwordError: '',
     mainError: ''
   })
+  const navigate = useNavigate()
   useEffect(() => {
     setState({
       ...state,
@@ -40,6 +41,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
         password: state.password
       })
       localStorage.setItem('accessToken', account.accessToken)
+      navigate('/', { replace: true })
     } catch (error) {
       setState({
         ...state,
